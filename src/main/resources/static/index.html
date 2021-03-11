@@ -1,0 +1,61 @@
+
+<html>
+	<head>
+		<title>Blueprints</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+		<script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+		<script src="js/apiclient.js"></script>
+		<script src="js/apimock.js"></script>
+		<script src="js/app.js"></script>
+		<link rel="stylesheet" 
+		href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css"/>
+		<link rel="stylesheet" 
+		href="mio.css"/>
+		
+	</head>
+	<body>
+		
+		<h1>Blueprints</h1>
+		<div>
+			<h2 class="titulo_author">Author</h2>
+			<div class="entrada">
+				<input id="authorId" class="author" type="text"/>
+
+				<input id="button" class="btn btn-light" type="button" value="get bleprints">
+			</div>
+		</div>
+		<div class="tabla">
+			<table id="tabla" style="width:100%" class="table table-bordered">
+				<tr>
+					<th>Blueprint name</th>
+					<th>Number of points</th>
+					<th>open</th>
+				</tr>
+				<tr>
+					<td>yayo</td>
+					<td>Smith</td>
+					<td>50</td>
+				</tr>
+				<tr>
+					<td>superyayo</td>
+					<td>Jackson</td>
+					<td>94</td>
+				</tr>
+			</table>
+			<br>
+			<p>Total User points: <span id="totalPoints"></span></p>
+		</div>
+		<div class="canvas">
+			<p>Current blueprint: <span id="nameBluePrint"></span></p>
+			<canvas id="myCanvas">
+			</canvas>
+		</div>
+	</body> 
+	 
+</html>	 
+
+
+	 
