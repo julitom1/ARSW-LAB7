@@ -1,6 +1,7 @@
 
 var authors=null;
 var api = apiclient;
+
 function normal2(err,authorName){
 	
 	let listaN=authorName.map(variable => {
@@ -59,6 +60,25 @@ function canvas(err, blueprint){
 			authors=$("#authorId").val();
 			//apimock.getBlueprintsByAuthor($("#authorId").val(), normal2);
 			api.getBlueprintsByAuthor($("#authorId").val(), normal2);
+		})
+	});
+	
+	$(document).ready(function(){
+		$("#myCanvas").click(function(){
+			var canvas = $("#mycanvas"); 
+			var context = canvas.getContext("2d");
+			if(window.PointerEvent) {
+				canvas.addEventListener("pointerdown", function(event){
+				alert('pointerdown at '+event.pageX+','+event.pageY);  
+          
+				});
+			}else {
+				canvas.addEventListener("mousedown", function(event){
+                alert('mousedown at '+event.clientX+','+event.clientY);  
+
+					}
+				);
+			}
 		})
 	});
 	
