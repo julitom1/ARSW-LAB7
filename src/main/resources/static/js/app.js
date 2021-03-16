@@ -61,19 +61,16 @@ function canvas(err, blueprint){
 			//apimock.getBlueprintsByAuthor($("#authorId").val(), normal2);
 			api.getBlueprintsByAuthor($("#authorId").val(), normal2);
 		})
-	});
-	
-	$(document).ready(function(){
 		$("#myCanvas").click(function(){
-			var canvas = $("#mycanvas"); 
-			var context = canvas.getContext("2d");
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
 			if(window.PointerEvent) {
-				canvas.addEventListener("pointerdown", function(event){
+				c.addEventListener("pointerdown", function(event){
 				alert('pointerdown at '+event.pageX+','+event.pageY);  
           
 				});
 			}else {
-				canvas.addEventListener("mousedown", function(event){
+				c.addEventListener("mousedown", function(event){
                 alert('mousedown at '+event.clientX+','+event.clientY);  
 
 					}
@@ -81,5 +78,7 @@ function canvas(err, blueprint){
 			}
 		})
 	});
+	
+
 	
 	
