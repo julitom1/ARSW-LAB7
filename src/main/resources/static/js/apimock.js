@@ -8,8 +8,8 @@ var apimock = (function () {
             name: "house",
             points: [
                 {
-                    x: 10,
-                    y: 10
+                    x: 0,
+                    y: 0
                 },
                 {
                     x: 15,

@@ -1,7 +1,9 @@
 
 var authors=null;
 var api = apiclient;
-
+var hayCanvas=false;
+var listaPuntos = []; 
+var name=null;
 function normal2(err,authorName){
 	
 	let listaN=authorName.map(variable => {
@@ -34,47 +36,62 @@ function normal2(err,authorName){
 function canvas(err, blueprint){
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
-	c.width=c.width;			
+	c.width=c.width;
+	listaPuntos=[];
 	ctx.moveTo(blueprint.points[0].x,blueprint.points[0].y);
 	blueprint.points.map(function(i){
 		var c = document.getElementById("myCanvas");
 		var ctx = c.getContext("2d");
 		ctx.lineTo(i.x,i.y);
 		ctx.stroke();
+		listaPuntos.push({x:i.x,y:i.y});
+		
 	});
+	hayCanvas=true;
 		
 }
 
 
 	function dibujando(por){
-		var name=por.parentElement.parentElement.id;
+		name=por.parentElement.parentElement.id;
 		document.getElementById("nameBluePrint").innerHTML = name;
-		apimock.getBlueprintsByNameAndAuthor(name,authors,canvas);
-		//api.getBlueprintsByNameAndAuthor(name,authors,canvas);
+		//apimock.getBlueprintsByNameAndAuthor(name,authors,canvas);
+		api.getBlueprintsByNameAndAuthor(name,authors,canvas);
 	}
 	
 	
 	$(document).ready(function(){
 		$("#button").click(function(){
-			
 			authors=$("#authorId").val();
 			//apimock.getBlueprintsByAuthor($("#authorId").val(), normal2);
 			api.getBlueprintsByAuthor($("#authorId").val(), normal2);
-		})
+		});
+		$("#save").on("click",function(){
+			//apimock.getBlueprintsByAuthor($("#authorId").val(), normal2);
+			var datos={author:authors,name:name,points:listaPuntos};
+			datos = JSON.stringify(datos);
+			//console.log(authors,"-",typeof(datos),"-",datos);
+			api.hacerPut(authors,name,datos).then(api.getBlueprintsByAuthor(authors, normal2));
+			//console.log("primera prueba");
+			//listaPuntos=[];
+			
+		});
 		$("#myCanvas").click(function(){
-			var c = document.getElementById("myCanvas");
-			var ctx = c.getContext("2d");
-			if(window.PointerEvent) {
-				c.addEventListener("pointerdown", function(event){
-				alert('pointerdown at '+event.pageX+','+event.pageY);  
-          
-				});
-			}else {
-				c.addEventListener("mousedown", function(event){
-                alert('mousedown at '+event.clientX+','+event.clientY);  
-
-					}
-				);
+			if(hayCanvas){
+				var c = document.getElementById("myCanvas");
+				var ctx = c.getContext("2d");
+				
+					c.addEventListener("pointerdown", function(event){ 
+						
+						var rect=c.getBoundingClientRect();
+						var posX=event.clientX-rect.left;
+						var posY=event.clientY-rect.top;
+						ctx.lineTo(posX,posY);
+						ctx.stroke();
+						listaPuntos.push({x:posX,y:posY});
+						
+					});
+				
 			}
 		})
 	});
@@ -82,3 +99,45 @@ function canvas(err, blueprint){
 
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
