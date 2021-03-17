@@ -45,7 +45,6 @@ function canvas(err, blueprint){
 		ctx.lineTo(i.x,i.y);
 		ctx.stroke();
 		listaPuntos.push({x:i.x,y:i.y});
-		
 	});
 	hayCanvas=true;
 		
@@ -66,78 +65,44 @@ function canvas(err, blueprint){
 			//apimock.getBlueprintsByAuthor($("#authorId").val(), normal2);
 			api.getBlueprintsByAuthor($("#authorId").val(), normal2);
 		});
+		
 		$("#save").on("click",function(){
 			//apimock.getBlueprintsByAuthor($("#authorId").val(), normal2);
 			var datos={author:authors,name:name,points:listaPuntos};
 			datos = JSON.stringify(datos);
-			//console.log(authors,"-",typeof(datos),"-",datos);
 			api.hacerPut(authors,name,datos).then(api.getBlueprintsByAuthor(authors, normal2));
-			//console.log("primera prueba");
-			//listaPuntos=[];
-			
 		});
+		
+		$("#create").on("click",function(){
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
+			c.width=c.width;
+			$("#formularioBlueprint").css("display","block");
+		});
+		
+		$("#botonConfirmar").on("click",function(){
+			var datos={author:authors,name:$("#newBlueprint").val(),points:[]};
+			datos = JSON.stringify(datos);
+			api.hacerPost(datos).then(api.getBlueprintsByAuthor(authors, normal2));
+		});
+		
+		$("#delete").on("click",function(){
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
+			c.width=c.width;
+			api.hacerDelete(authors,name).then(api.getBlueprintsByAuthor(authors, normal2));
+		});
+		
 		$("#myCanvas").click(function(){
 			if(hayCanvas){
 				var c = document.getElementById("myCanvas");
 				var ctx = c.getContext("2d");
-				
-					c.addEventListener("pointerdown", function(event){ 
-						
-						var rect=c.getBoundingClientRect();
-						var posX=event.clientX-rect.left;
-						var posY=event.clientY-rect.top;
-						ctx.lineTo(posX,posY);
-						ctx.stroke();
-						listaPuntos.push({x:posX,y:posY});
-						
-					});
-				
+				var rect=c.getBoundingClientRect();
+				var posX=event.clientX-rect.left;
+				var posY=event.clientY-rect.top;
+				ctx.lineTo(posX,posY);
+				ctx.stroke();
+				listaPuntos.push({x:posX,y:posY});
 			}
-		})
+		});
 	});
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-

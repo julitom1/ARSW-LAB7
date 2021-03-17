@@ -15,25 +15,46 @@ var apiclient = (function () {
 				}
 			);
 		},
-		    hacerPut : function(author,name,datos){
-				console.log(author +" - "+name);
-				 let promise = new Promise( (resolve, reject) => {
-					var putPromise = $.ajax({
-					url: "http://localhost:8080/blueprints/" + author +"/"+name,
-					type: 'PUT',
-					data: datos,
-					contentType: "application/json"
-				});
-				resolve(putPromise);
-				 
-				});
-				
-
-				return promise;
-				
-			}
-		};
-
 		
-
+		hacerPut : function(author,name,datos){
+			let promise = new Promise( (resolve, reject) => {
+				var putPromise = $.ajax({
+				url: "http://localhost:8080/blueprints/" + author +"/"+name,
+				type: 'PUT',
+				data: datos,
+				contentType: "application/json"
+			});
+			resolve(putPromise);
+			});
+			
+			return promise;
+		},
+		
+		hacerPost : function(datos){
+			let promise = new Promise( (resolve, reject) => {
+				var postPromise = $.ajax({
+				url: "http://localhost:8080/blueprints/",
+				type: 'POST',
+				data: datos,
+				contentType: "application/json"
+			});
+			resolve(postPromise);
+			});
+			
+			return promise;			
+		},
+		
+		hacerDelete : function(author,name){
+			let promise = new Promise( (resolve, reject) => {
+				var deletePromise = $.ajax({
+				url: "http://localhost:8080/blueprints/"+ author + "/" + name,
+				type: 'DELETE',
+				contentType: "application/json"
+			});
+			resolve(postPromise);
+			});
+			
+			return promise;			
+		}
+	};
 })();
